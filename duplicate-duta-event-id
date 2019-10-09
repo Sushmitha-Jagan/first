@@ -1,0 +1,116 @@
+sf293      123    Fénix vs JJ Urquiza
+sf322      123    Fénix (Argentina) vs Justo José de Urquiza
+
+duta=> select * from ods_master_events where event_key in ('sf293','sf322') order by event_time desc;
+
+-[ RECORD 1 ]-------------+-----------------------------------------------------------------------------------------------------------------------------
+duta_event_id             | 133657
+event_time                | 2019-09-30 18:30:00+00
+sport_name                | football
+categories                | {"fenix (argentina)","justo jose de urquiza","primera division b de argentina","fenix (argentina) vs justo jose de urquiza"}
+title                     | Fénix (Argentina) vs Justo José de Urquiza
+event_key                 | sf322
+ctime                     | 2019-09-29 21:41:48.406668+00
+home_team_id              | 1042
+away_team_id              | 2240
+tournament_id             | 35
+editor_comments_for_match | 
+-[ RECORD 2 ]-------------+-----------------------------------------------------------------------------------------------------------------------------
+duta_event_id             | 133605
+event_time                | 2019-09-30 18:30:00+00
+sport_name                | football
+categories                | {"fenix (argentina)","justo jose urquiza","primera division b de argentina","fenix (argentina) vs justo jose urquiza"}
+title                     | Fénix vs JJ Urquiza
+event_key                 | sf293
+ctime                     | 2019-09-29 00:56:13.202947+00
+home_team_id              | 1042
+away_team_id              | 1976
+tournament_id             | 35
+editor_comments_for_match | 
+
+select os.team_id, os.team_name, os.source_team_id, os.source_name, od.normalized_name from ods_team_source os join ods_teams od using (team_id) where team_id  in (2240,1976) ;
+
+ team_id |       team_name       | source_team_id | source_name |    normalized_name    
+---------+-----------------------+----------------+-------------+-----------------------
+    2240 | Justo José de Urquiza | 201161         | sofascore   | justo jose de urquiza
+    1976 | Justo José Urquiza    | 17696          | espn        | justo jose urquiza
+    2240 | Justo José de Urquiza | 3982           | crowdscore  | justo jose de urquiza
+
+
+begin; update ods_team_source set team_id ='2240' where team_id ='1976' and source_team_id ='17696' AND source_name ='espn' and sports_name='football';
+
+
+sf281      8405   Hammarby vs Orebro SK
+sf317      8455   Hammarby vs Örebro
+
+-[ RECORD 1 ]-------------+-------------------------------------------------------------------------------------------------------------------------------------
+duta_event_id             | 133593
+event_time                | 2019-09-30 17:00:00+00
+sport_name                | football
+categories                | {hammarby,orebron,"swedish allsvenskanliga","hammarby vs orebron"}
+title                     | Hammarby vs Orebro SK
+event_key                 | sf281
+ctime                     | 2019-09-29 00:54:00.121165+00
+home_team_id              | 1454
+away_team_id              | 1975
+tournament_id             | 72
+editor_comments_for_match | 
+-[ RECORD 2 ]-------------+-------------------------------------------------------------------------------------------------------------------------------------
+duta_event_id             | 133652
+event_time                | 2019-09-30 17:00:00+00
+sport_name                | football
+categories                | {hammarby,orebro,"swedish allsvenskanliga","hammarby vs orebro"}
+title                     | Hammarby vs Örebro
+event_key                 | sf317
+ctime                     | 2019-09-29 21:39:43.098483+00
+home_team_id              | 1454
+away_team_id              | 2267
+tournament_id             | 72
+editor_comments_for_match | 
+
+ team_id | team_name | source_team_id | source_name | normalized_name 
+---------+-----------+----------------+-------------+-----------------
+    2267 | Örebro    | 1715           | crowdscore  | orebro
+    1975 | Orebro SK | 7944           | espn        | orebron
+    1975 | örebro sk | 1768           | sofascore   | orebron
+
+begin; update ods_team_source set team_id ='1975' where team_id ='2267' and source_team_id ='1715' AND source_name ='crowdscore' and sports_name='football';
+
+sf283      5120   Viking FK vs Mjondalen IF
+sf318      5186   Viking vs Mjøndalen
+
+-[ RECORD 1 ]-------------+--------------------------------------------------------------------------------------------------------------------------------------------------
+duta_event_id             | 133653
+event_time                | 2019-09-30 17:00:00+00
+sport_name                | football
+categories                | {"viking fk",mjondalen,"norwegian eliteserien","mjondalen vs viking fk"}
+title                     | Viking vs Mjøndalen
+event_key                 | sf318
+ctime                     | 2019-09-29 21:40:14.670417+00
+home_team_id              | 933
+away_team_id              | 4540
+tournament_id             | 102
+editor_comments_for_match | 
+-[ RECORD 2 ]-------------+--------------------------------------------------------------------------------------------------------------------------------------------------
+duta_event_id             | 133595
+event_time                | 2019-09-30 17:00:00+00
+sport_name                | football
+categories                | {"viking fk","mjondalen if","norwegian eliteserien","mjondalen if vs viking fk"}
+title                     | Viking FK vs Mjondalen IF
+event_key                 | sf283
+ctime                     | 2019-09-29 00:54:23.298541+00
+home_team_id              | 933
+away_team_id              | 5665
+tournament_id             | 102
+editor_comments_for_match | 
+
+
+team_id |  team_name   | source_team_id | source_name | normalized_name 
+---------+--------------+----------------+-------------+-----------------
+    5665 | mjondalen if | 12098          | espn        | mjondalen if
+    4540 | Mjøndalen    | 903            | sofascore   | mjondalen
+    4540 | mjøndalen    | 1716           | crowdscore  | mjondalen
+
+begin; update ods_team_source set team_id ='4540' where team_id ='5665' and source_team_id ='12098' AND source_name ='espn' and sports_name='football';
+
+
