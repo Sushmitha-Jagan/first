@@ -1,0 +1,94 @@
+In curation:
+
+(livescores)ubuntu@curation:~/server/whatsappchannels/bin ((v0.14.1403) $%)⟫ python create_channel.py -c ned_tv -t ned_tv -k nedtv -m partner -p True
+
+-c channel name
+-t tittle
+-k keyword
+-m media type { its partner for all channel expect for games }
+-p publish
+
+
+/home/ubuntu/livescores/local/lib/python2.7/site-packages/cryptography/hazmat/primitives/constant_time.py:26: CryptographyDeprecationWarning: Support for your Python version is deprecated. The next version of cryptography will remove support. Please upgrade to a 2.7.x release that supports hmac.compare_digest as soon as possible.
+  utils.DeprecatedIn23,
+2019-09-17 12:25:23,702 - MainThread - kafka.conn - WARNING - Old SSL module detected. SSL error handling may not operate cleanly. Consider upgrading to Python 3.3 or 2.7.9
+2019-09-17 12:25:23,841 - MainThread - yowsup.demos.sendclient.models - INFO - db session pooling disabled
+2019-09-17 12:25:23,858 - MainThread - yowsup.demos.sendclient.models - INFO - db session pooling disabled
+2019-09-17 17:55:24,824 - MainThread - dutalib.dbutil - INFO - db session pooling disabled
+2019-09-17 17:55:24,848 - MainThread - sports.ods_v2 - INFO - ODSConfigsManager init
+/home/ubuntu/livescores/local/lib/python2.7/site-packages/numpy/core/fromnumeric.py:2652: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+
+2019-09-17 17:55:26,156 - MainThread - py.warnings - WARNING - /home/ubuntu/livescores/local/lib/python2.7/site-packages/numpy/core/fromnumeric.py:2652: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+
+/duta/server/whatsappchannels/scraper/downloader.py:14: DeprecationWarning: the sets module is deprecated
+  import sets
+
+2019-09-17 17:55:26,251 - MainThread - py.warnings - WARNING - /duta/server/whatsappchannels/scraper/downloader.py:14: DeprecationWarning: the sets module is deprecated
+  import sets
+
+2019-09-17 17:55:26,378 - MainThread - blogger.models - INFO - Creating a new entry in blog_blogcategory table - 'ned_tv'
+Channel ned_tv created
+Exception TypeError: TypeError("'NoneType' object is not callable",) in <bound method Client.__del__ of <etcd.client.Client object at 0x7f9013151610>> ignored
+
+Also,  need to create a channel in staging:
+
+(livescores)ubuntu@staging_main:~/server/whatsappchannels/bin (2175-alert-for-vanity-url-handler *$%=)⟫ python create_channel.py -c news23 -t news23 -k news23 -m partner -p True
+2019-09-30 06:38:19,603 - MainThread - yowsup.demos.sendclient.models - INFO - db session pooling disabled
+2019-09-30 06:38:19,620 - MainThread - yowsup.demos.sendclient.models - INFO - db session pooling disabled
+2019-09-30 12:08:22,130 - MainThread - dutalib.dbutil - INFO - db session pooling disabled
+2019-09-30 12:08:22,141 - MainThread - sports.ods_v2 - INFO - ODSConfigsManager init
+2019-09-30 12:08:25,606 - MainThread - blogger.models - INFO - Creating a new entry in blog_blogcategory table - 'news23'
+Channel news23 created
+Exception TypeError: TypeError("'NoneType' object is not callable",) in <bound method Client.__del__ of <etcd.client.Client object at 0x7f98dcb5f550>> ignored
+
+
+(livescores)ubuntu@curation:~/server/whatsappchannels/operations ((v0.14.1403) $%)⟫ python create_pool.py info -p ned_tv_info -c ned_tv -s 3
+
+in slack create slack_channel: ned_tv
+and invite
+channel_publisher_bot
+Cricket scoring bot
+Football Videos Publisher
+
+
+In ops:
+
+(livescores)2 ubuntu@ops:~/server/whatsappchannels/operations ((v0.14.1380) $)⟫ python slack_channel_map.py create -s test -c test
+
+(livescores)2 ubuntu@ops:~/server/whatsappchannels/operations ((v0.14.1380) $)⟫ python slack_channel_map.py create -s ned_tv -c ned_tv
+
+need to create a branch:
+
+yowsup/demos/sendclient/workflows/strings/welcome_message_for_channel.py
+
+sushmitha@ip-10-0-0-49:~/duta/yowsup/yowsup/demos/sendclient/workflows/strings ((0803484...))⟫ git fetch
+sushmitha@ip-10-0-0-49:~/duta/yowsup/yowsup/demos/sendclient/workflows/strings ((0803484...))⟫ git checkout 273-welcome-msg-for-nedtv 
+Previous HEAD position was 0803484... wlc message
+Branch 273-welcome-msg-for-nedtv set up to track remote branch 273-welcome-msg-for-nedtv from origin.
+Switched to a new branch '273-welcome-msg-for-nedtv'
+
+in k8s:
+
+sushmitha@ip-10-0-0-49:~/duta/whatsappchannels (master %=)⟫ skafstag run -f skaffold.yaml
+
+in skaffold.yaml
+      - ./celery_workers/k8s/celery-worker.yaml
+)⟫ kstag get pod | grep "celery"
+
+need to put in engg
+
+once it is merged by prem or magesh
+
+in k8s, 
+
+sushmitha@ip-10-0-0-49:~/duta/yowsup/yowsup/demos/sendclient/workflows/strings (273-welcome-msg-for-nedtv=)⟫ git checkout master 
+Switched to branch 'master'
+Your branch is behind 'origin/master' by 66 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+sushmitha@ip-10-0-0-49:~/duta/yowsup/yowsup/demos/sendclient/workflows/strings (master<)⟫ git pull origin master
+
+sushmitha@ip-10-0-0-49:~/duta/whatsappchannels (master %=)⟫ skafprod run -f skaffold.yaml
+
+
