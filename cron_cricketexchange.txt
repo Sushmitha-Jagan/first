@@ -1,0 +1,46 @@
+to cron cricketexchange
+
+⟫ kprod get pod | grep sports-app
+sports-app-7dfdf548db-rrghk                                       1/1     Running                0          2d
+sports-app-7dfdf548db-tr9f2                                       1/1     Running                0          15h
+sports-app-7dfdf548db-v8rlx                                       1/1     Running                0          1d
+
+take any one of pod
+
+sushmitha@ip-10-0-0-49:~/duta/load-balancer ((f766525...))⟫ kprod -it exec sports-app-7dfdf548db-rrghk bash
+running command on production. do you want to continue? [NO/yes] yes
+root@sports-app-7dfdf548db-rrghk:/duta/server/sports# cd jobs/
+root@sports-app-7dfdf548db-rrghk:/duta/server/sports/jobs# ls
+basketball_stats  cricket_score_card  dream11_points  football_formations  sports_cron.py
+
+root@sports-app-7dfdf548db-rrghk:/duta/server/sports/jobs# python sports_cron.py -h
+{"name": "dutalib.s3_utils", "process": 18751, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 10:57:00,124", "message": "Connecting to S3", "levelname": "INFO"}
+{"name": "dutalib.s3_utils", "process": 18751, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 10:57:00,124", "message": "Connecting to S3 Bucket - wiki-search-cache", "levelname": "INFO"}
+usage: sports_cron.py [-h] [--sport SPORT] [--source SOURCE] [--mid MATCH_ID]
+
+Sports Cron
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --sport SPORT    name of the sport to be cronned
+  --source SOURCE  source of the match to be cronned
+  --mid MATCH_ID   match id of the match to be cronned
+
+root@sports-app-7dfdf548db-rrghk:/duta/server/sports/jobs# python sports_cron.py --sport cricket --source cricketexchange --mid Jn
+
+we need to take Jn from https://cricket-exchange-2.firebaseio.com/liveMatches.json
+output of the above
+
+root@sports-app-7dfdf548db-rrghk:/duta/server/sports/jobs# python sports_cron.py --sport cricket --source cricketexchange --mid Jn
+{"name": "dutalib.s3_utils", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:08,610", "message": "Connecting to S3", "levelname": "INFO"}
+{"name": "dutalib.s3_utils", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:08,611", "message": "Connecting to S3 Bucket - wiki-search-cache", "levelname": "INFO"}
+{"name": "__main__", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:08,664", "message": "Found sport class: <class 'sports.cricket.cricket_exchange.CricketExchange'>", "levelname": "INFO"}
+{"name": "similarity.similarity", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:08,885", "message": "Getting category for in_str - u'Sri Lanka', (domain - cricket)", "levelname": "INFO"}
+/duta/server/similarity/similarity/utils.py:23: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  names_config = yaml.load(open(yaml_path).read())
+{"name": "similarity.utils", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:09,748", "message": "Loading bing results json", "levelname": "INFO"}
+{"name": "similarity.similarity", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:09,914", "message": "Getting category for in_str - u'Australia', (domain - cricket)", "levelname": "INFO"}
+{"name": "similarity.utils", "process": 18812, "threadName": "MainThread", "context": null, "asctime": "2019-10-29 11:00:10,787", "message": "Loading bing results json", "levelname": "INFO"}
+/duta/server/sports/sports/cricket/__init__.py:1392: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  config = yaml.load(self.config_yaml)
+[('slow', '{"update_time": 1200, "milestones": true, "score": 8, "six": true, "wickets": 1, "four": false, "score_card_threshold": 5, "last_over": false, "overs": 2}'), ('team2_normalized_name', 'australia'), ('match_id', 'Jn'), ('match_url', 'Jn'), ('tournament', ''), ('match_title', u'SRI LANKA VS AUSTRALIA'), ('away_team', u'Australia'), ('match_url_cricbuzz', ''), ('on_demand_sports', 'True'), ('home_team_normalized', 'sri lanka'), ('match_type', 't20'), ('away_team_normalized', 'australia'), ('categories', ['sri lanka', 'australia', '']), ('home_team', u'Sri Lanka'), ('match_datetime', '2019-10-30T08:10:00+00:00'), ('team1_normalized_name', 'sri lanka'), ('title', u'SRI LANKA VS AUSTRALIA'), ('match_timestamp', '2019-10-30T08:10:00+00:00'), ('fast', '{"update_time": 1200, "milestones": true, "score": 8, "six": true, "wickets": 1, "four": false, "score_card_threshold": 5, "last_over": false, "overs": 2}'), ('source', 'cricketexchange'), ('match_description', u'SRI LANKA VS AUSTRALIA'), ('notification', False), ('categories_list', ['sri lanka', 'australia', '']), ('tournament_normalized', ''), ('languages', 'en'), ('languages', 'hi'), ('languages', 'ta'), ('languages', 'ml'), ('languages', 'te'), ('languages', 'pa'), ('languages', 'ur'), ('languages', 'bn'), ('pace_msg_languages', 'en'), ('pace_msg_languages', 'hi'), ('pace_msg_languages', 'ta'), ('pace_msg_languages', 'ml'), ('pace_msg_languages', 'te'), ('pace_msg_languages', 'pa'), ('pace_msg_languages', 'ur'), ('pace_msg_languages', 'bn')]
