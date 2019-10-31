@@ -1,0 +1,41 @@
+to add new tournament for sofascore:
+go to sofascore link and click the tournament:
+then inspect it: and get the data-event-id:8417622
+and put this id in https://www.sofascore.com/event/8417622/json
+
+in the tournament: 
+take the tournament id
+
+local machine: 
+~/server/sports/sports/football [master|✚ 1] 
+17:16 $ vi sofascore.py 
+
+add tournament id: 43, 884]
+
+and put tournament name : 
+43 -- dfb pokal
+884 -- coupe de la ligue
+"""
+
+
+✔ ~/server/sports/sports/football [master|✚ 1] 
+17:19 $ git add sofascore.py 
+✔ ~/server/sports/sports/football [master|●1] 
+17:22 $ git commit -m "added two tour id"
+[master 562e390d] added two tour id
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+✔ ~/server/sports/sports/football [master ↑·1|✔] 
+17:22 $ git push origin master 
+Warning: Permanently added 'code.duta.in,34.224.45.87' (ECDSA) to the list of known hosts.
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 495 bytes | 495.00 KiB/s, done.
+Total 5 (delta 4), reused 0 (delta 0)
+To code.duta.in:duta/sports.git
+   b48cb4fc..562e390d  master -> master
+
+in k8s,
+
+release football-sofascore-sports-cron.yaml after pulling latest master
+then, create a job
