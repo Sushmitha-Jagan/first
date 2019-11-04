@@ -1,0 +1,11 @@
+to add ssh key from one laptop to other
+in new one:
+create a directory: mkdir .ssh
+then create two files: id_rsa id_rsa.pub
+add private and public key
+then,
+ssh-add
+sudo chmod 400 id_rsa
+ssh-add
+
+then we can access any server that has a authorized key 
