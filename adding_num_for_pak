@@ -1,0 +1,59 @@
+duta=> select w.id from workers w join worker_load_mview ml on (w.id = ml.worker_id) where w.role ='pakreserve_promo_88888888' order by ml.num_groups asc limit 10;
+ 
+ 14098121365
+ 61498853519
+ 12513037153
+ 16096352051
+ 16025598703
+ 14098121295
+ 16096351936
+ 61498850122
+ 17026950917
+ 19715175172
+
+this will give a list of 10 number
+
+then get these numbers lke this
+
+'14098121365', '61498853519', '12513037153', '16096352051', '16025598703', '14098121295', '16096351936', '61498850122', '17026950917', '19715175172'
+
+duta=> select * from pool_config where pool_name = 'urducricket_pak_info';
+-[ RECORD 1 ]----+------------------------------
+pool_name        | urducricket_pak_info
+channel_id       | urducricket
+refill_threshold | 275
+alert_threshold  | 0
+create_time      | 2019-06-25 09:20:38.587916+00
+refill_expiry    | 
+reuse_expiry     | 
+duta_event_id    | 
+category         | 
+only_fresh_num   | t
+exclude_cc       | 91
+include_cc       | 
+
+
+duta=> begin; update workers set role ='urducricket_pak_info', channel_id ='urducricket' where id in ('14098121365', '61498853519', '12513037153', '16096352051', '16025598703', '14098121295', '16096351936', '61498850122', '17026950917', '19715175172');
+
+duta=> commit;
+
+duta=> select * from worker_publisher_mappings where worker_id in ('14098121365', '61498853519', '12513037153', '16096352051', '16025598703', '14098121295', '16096351936', '61498850122', '17026950917', '19715175172');
+
+this will give this:
+
+ 14098121365
+ 61498853519
+ 12513037153
+ 16096352051
+ 16025598703
+ 14098121295
+ 16096351936
+ 61498850122
+ 17026950917
+ 19715175172
+
+
+
+
+
+
